@@ -1,0 +1,220 @@
+---
+title: "R in Data Science - Breakout Session - Campus DevCon Summit"
+author: "Jose Marie Antonio Minoza"
+date: '2023-09-08'
+output: html_document
+---
+
+# Introduction to R
+
+## What is R?
+
+R is a powerful and versatile programming language and environment for statistical computing and data analysis. It was developed by statisticians and data scientists for a wide range of data-related tasks, from data manipulation and visualization to advanced statistical modeling.
+
+## Why use R?
+
+R is widely used in academia, industry, and research for several reasons:
+
+-   Open-source: R is free and open-source, making it accessible to anyone.
+-   Active community: A large and active community of users and developers provides support and contributes packages.
+-   Extensive libraries: R has a rich ecosystem of packages for various data analysis and visualization tasks.
+-   Data manipulation: R excels at data manipulation and transformation.
+-   Statistical analysis: R offers a wide range of statistical techniques and models.
+-   Data visualization: R has excellent tools for creating informative data visualizations.
+
+# Data Types in R
+
+## Numeric
+
+Numeric data types are used to represent numbers, both integers and real numbers (floating-point).
+
+```{r}
+# Numeric variables 
+x <- 5 
+y <- 3.14
+```
+
+## Character
+
+Character data types are used to store text and strings.
+
+```{r}
+# Character variables
+name <- "John"
+message <- "Hello, world!"
+```
+
+## Logical
+
+Logical data types represent binary values - either TRUE or FALSE.
+
+```{r}
+# Logical variables
+is_raining <- TRUE
+is_sunny <- FALSE
+```
+
+## Factors
+
+Factors are used to represent categorical data with predefined levels.
+
+```{r}
+# Creating a factor
+gender <- factor(c("Male", "Female", "Male", "Female"))
+```
+
+## Data Frames
+
+Data frames are used to store tabular data with rows and columns.
+
+```{r}
+# Creating a data frame
+data <- data.frame(
+  Name = c("Alice", "Bob", "Charlie"),
+  Age = c(25, 30, 22)
+)
+```
+
+# Matrices in R
+
+## Creating Matrices
+
+Matrices are two-dimensional arrays in R.
+
+```{r}
+# Creating a matrix
+matrix_data <- matrix(1:6, nrow = 2, ncol = 3)
+```
+
+## Matrix Operations
+
+You can perform various operations on matrices, including addition, multiplication, and transposition.
+
+```{r}
+
+# Matrix operations
+mat_a <- matrix(1:6, nrow = 2, ncol = 3)
+mat_b <- matrix(7:12, nrow = 2, ncol = 3)
+mat_sum <- mat_a + mat_b
+mat_prod <- mat_a %*% t(mat_b)
+```
+
+## Indexing and Subsetting
+
+You can access elements and subsets of matrices using indexing.
+
+```{r}
+
+# Matrix indexing and subsetting
+first_row <- matrix_data[1, ]
+second_col <- matrix_data[, 2]
+subset_matrix <- matrix_data[1:2, 2:3]
+```
+
+# Functions in R
+
+## Built-in Functions
+
+R provides numerous built-in functions for various purposes.
+
+```{r}
+# Built-in functions
+mean_value <- mean(c(1, 2, 3, 4, 5))
+sqrt_value <- sqrt(16)
+```
+
+## Creating User-defined Functions
+
+You can define your own functions in R using the function() keyword.
+
+```{r}
+# User-defined function
+my_function <- function(x, y) {
+  result <- x^2 + y^2
+  return(result)
+}
+```
+
+## Function Arguments
+
+Functions can have arguments that allow you to pass values to them.
+
+```{r}
+# Function with arguments
+calculate_area <- function(length, width) {
+  area <- length * width
+  return(area)
+}
+```
+
+# The Apply Family of Functions
+
+The apply family of functions in R is used for applying a function to the rows or columns of a matrix or data frame. It includes functions like apply, lapply, sapply, and mapply.
+
+## apply()
+
+The apply() function applies a specified function to either rows or columns of a matrix.
+
+```{r}
+# Example of apply() to calculate row sums
+row_sums <- apply(matrix_data, 1, sum)
+```
+
+## lapply()
+
+The lapply() function applies a function to each element of a list or vector and returns a list.
+
+```{r}
+# Example of lapply() to square each element of a list
+numbers <- list(a = 1, b = 2, c = 3)
+squared_numbers <- lapply(numbers, function(x) x^2)
+```
+
+## sapply()
+
+The sapply() function is similar to lapply() but simplifies the result to a vector or matrix if possible.
+
+```{r}
+# Example of sapply() to square each element of a list
+numbers <- list(a = 1, b = 2, c = 3)
+squared_numbers <- sapply(numbers, function(x) x^2)
+```
+
+## mapply()
+
+The mapply() function is used for multiple input vectors and applies a function element-wise.
+
+```{r}
+# Example of mapply() to calculate the sum of two vectors element-wise
+vector1 <- c(1, 2, 3)
+vector2 <- c(4, 5, 6)
+sum_vector <- mapply(function(x, y) x + y, vector1, vector2)
+```
+
+# R Shiny
+
+## Embedded Application
+
+It's also possible to embed an entire Shiny application within an R Markdown document using the `shinyAppDir` function. This example embeds a Shiny application located in another directory:
+
+### Widget
+
+```{r, echo=FALSE}
+# shinyAppDir(
+#   system.file("examples/06_tabsets", package = "shiny"),
+#   options = list(
+#     width = "100%", height = 550
+#   )
+# )
+```
+
+### Widget
+
+```{r, echo=FALSE}
+# shinyAppDir(
+#   system.file("examples/07_widgets", package = "shiny"),
+#   options = list(
+#     width = "100%", height = 550
+#   )
+# )
+```
