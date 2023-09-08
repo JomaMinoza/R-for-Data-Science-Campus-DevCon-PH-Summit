@@ -63,6 +63,42 @@ Factors are used to represent categorical data with predefined levels.
 gender <- factor(c("Male", "Female", "Male", "Female"))
 ```
 
+# Operators
+
+```{r}
+a <- 1 + 1 # addition
+b <- 2 * 9 # multiplication
+c <- 3 - 1 # subtraction
+d <- a / c # division
+e <- b %% 5 # modulus
+```
+
+# Special Data Types
+```{r}
+NA
+NaN
+NULL
+```
+```{r}
+1/0
+90000^200
+```
+```{r}
+Inf * -2
+Inf - Inf
+```
+```{r}
+-2023/Inf
+2023/Inf
+-2023/-Inf
+2023/-Inf
+```
+
+
+```{r}
+-2023/0
+2023/0
+```
 ## Data Frames
 
 Data frames are used to store tabular data with rows and columns.
@@ -111,6 +147,29 @@ second_col <- matrix_data[, 2]
 subset_matrix <- matrix_data[1:2, 2:3]
 ```
 
+
+```{r}
+A <- matrix(data = c(1,2,3,4,5,6,7,8),nrow = 2, ncol = 4)
+A
+```
+
+
+```{r}
+A[1,2] # A[row,column]
+A[,2] # return all rows of Column 2
+A[1,] # return all columns of Row 1
+```
+```{r}
+C <-  matrix(data = 1:100,nrow = 5, ncol = 20)
+C
+```
+
+```{r}
+C[1,1:20][C[1,1:20]<10]
+C[,1][C[,1]>10]
+```
+
+
 # Functions in R
 
 ## Built-in Functions
@@ -122,6 +181,34 @@ R provides numerous built-in functions for various purposes.
 mean_value <- mean(c(1, 2, 3, 4, 5))
 sqrt_value <- sqrt(16)
 ```
+
+
+```{r}
+# Logarithms 
+log(x=144,base=12)
+log(x=216,base=6)
+
+# Exponentials
+exp(x=3)
+log(x=20.17)
+```
+
+```{r}
+x <- c(2,0,2,3) # Creates vector with elements 2,0,0,4
+y <- c(1,6,2,9)
+x + y # Sums elements of two vectors
+```
+```{r}
+x * 4 # Multiplies elements
+```
+```{r}
+sqrt(x) # Function applies to each element
+```
+```{r}
+vector <- c(1,2,3,4,5)
+length(vector)
+```
+
 
 ## Creating User-defined Functions
 
@@ -146,6 +233,22 @@ calculate_area <- function(length, width) {
   return(area)
 }
 ```
+
+
+```{r}
+calculate_area(4, 4)
+```
+```{r}
+
+l <- seq(1,4)
+w <- rep(5,4)
+l
+w
+```
+```{r}
+calculate_area(l, w)
+```
+
 
 # The Apply Family of Functions
 
@@ -191,8 +294,144 @@ vector2 <- c(4, 5, 6)
 sum_vector <- mapply(function(x, y) x + y, vector1, vector2)
 ```
 
-# Machine Learning in R
+# Data Science in R
 
+## Visualization
+
+### Basic Graphics (Base R)
+
+Basic graphics in R allow you to create simple plots using functions like plot, hist, and boxplot. Let's create some basic visualizations.
+
+#### Scatterplot
+
+```{r}
+head(iris, 5)
+```
+
+
+```{r}
+# Scatterplot of Sepal Length vs. Sepal Width
+plot(iris$Sepal.Length, 
+     iris$Sepal.Width, 
+     xlab = "Sepal Length", 
+     ylab = "Sepal Width", 
+     main = "Scatterplot of Sepal Length vs. Sepal Width")
+```
+```{r}
+pacman::p_load('ggplot2')
+# Scatterplot using ggplot2
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_point() +
+  labs(x = "Sepal Length", y = "Sepal Width", title = "Scatterplot of Sepal Length vs. Sepal Width")
+```
+```{r}
+# Histogram of Petal Length
+hist(iris$Petal.Length, xlab = "Petal Length", main = "Histogram of Petal Length")
+```
+
+
+```{r}
+# Histogram of Petal Length using ggplot2
+ggplot(iris, aes(x = Petal.Length)) +
+  geom_histogram(binwidth = 0.2, fill = "blue", color = "black") +
+  labs(x = "Petal Length", title = "Histogram of Petal Length")
+```
+```{r}
+# Boxplot of Sepal Length by Species
+boxplot(Sepal.Length ~ Species, 
+        data = iris, 
+        xlab = "Species", 
+        ylab = "Sepal Length", 
+        main = "Boxplot of Sepal Length by Species")
+
+```
+```{r}
+# Boxplot of Sepal Length by Species using ggplot2
+ggplot(iris, aes(x = Species, y = Sepal.Length)) +
+  geom_boxplot(fill = "green", color = "black") +
+  labs(x = "Species", y = "Sepal Length", title = "Boxplot of Sepal Length by Species")
+
+```
+## Regression Analysis
+
+In this tutorial, we will explore regression analysis in R. Regression is a statistical technique used to model the relationship between a dependent variable and one or more independent variables. We will cover the following topics:
+
+1. Introduction to Regression
+2. Loading and Preparing the Data
+3. Simple Linear Regression
+4. Multiple Linear Regression
+5. Model Evaluation
+6. Conclusion
+
+### 1. Introduction to Regression
+
+Regression analysis helps us understand how the value of a dependent variable changes when one or more independent variables change. It is commonly used for prediction and understanding relationships between variables.
+
+### 2. Loading and Preparing the Data
+
+#### Loading Data
+
+Let's start by loading a dataset. For this tutorial, we'll use a sample dataset like the `mtcars` dataset, which contains information about car attributes.
+
+```{r}
+# Load the mtcars dataset
+data(mtcars)
+```
+
+```{r}
+head(mtcars)
+```
+
+###3. Simple Linear Regression
+
+Simple linear regression is used when there is a linear relationship between the dependent variable and a single independent variable. Let's perform simple linear regression.
+
+```{r}
+
+# Fit a simple linear regression model
+model_simple <- lm(mpg ~ hp, data = mtcars)
+
+# Print the regression summary
+summary(model_simple)
+```
+### 4. Multiple Linear Regression
+
+Multiple linear regression extends simple linear regression to include multiple independent variables. Let's perform multiple linear regression.
+
+```{r}
+# Fit a multiple linear regression model
+model_multiple <- lm(mpg ~ hp + wt + qsec, data = mtcars)
+
+# Print the regression summary
+summary(model_multiple)
+```
+### 5. Model Evaluation
+
+To evaluate the regression models, we can use various metrics such as R-squared, adjusted R-squared, and residuals analysis.
+
+```{r}
+
+# Evaluate the simple linear regression model
+rsq_simple <- summary(model_simple)$r.squared
+adj_rsq_simple <- summary(model_simple)$adj.r.squared
+
+# Evaluate the multiple linear regression model
+rsq_multiple <- summary(model_multiple)$r.squared
+adj_rsq_multiple <- summary(model_multiple)$adj.r.squared
+```
+
+
+```{r}
+rsq_simple
+adj_rsq_simple
+```
+```{r}
+rsq_multiple
+adj_rsq_multiple
+```
+```{r}
+saveRDS(model_multiple, "final_regression_model.RDS")
+```
 
 
 # R Shiny
