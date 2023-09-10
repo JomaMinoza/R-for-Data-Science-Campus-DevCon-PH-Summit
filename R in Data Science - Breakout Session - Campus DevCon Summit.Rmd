@@ -360,7 +360,6 @@ In this tutorial, we will explore regression analysis in R. Regression is a stat
 3. Simple Linear Regression
 4. Multiple Linear Regression
 5. Model Evaluation
-6. Conclusion
 
 ### 1. Introduction to Regression
 
