@@ -249,7 +249,6 @@ w
 calculate_area(l, w)
 ```
 
-
 # The Apply Family of Functions
 
 The apply family of functions in R is used for applying a function to the rows or columns of a matrix or data frame. It includes functions like apply, lapply, sapply, and mapply.
@@ -410,7 +409,6 @@ summary(model_multiple)
 To evaluate the regression models, we can use various metrics such as R-squared, adjusted R-squared, and residuals analysis.
 
 ```{r}
-
 # Evaluate the simple linear regression model
 rsq_simple <- summary(model_simple)$r.squared
 adj_rsq_simple <- summary(model_simple)$adj.r.squared
@@ -430,6 +428,11 @@ rsq_multiple
 adj_rsq_multiple
 ```
 ```{r}
+saveRDS(model_simple, "simple_regression_model.RDS")
+```
+
+
+```{r}
 saveRDS(model_multiple, "final_regression_model.RDS")
 ```
 
@@ -440,7 +443,7 @@ saveRDS(model_multiple, "final_regression_model.RDS")
 
 It's also possible to embed an entire Shiny application within an R Markdown document using the `shinyAppDir` function. This example embeds a Shiny application located in another directory:
 
-### Widget
+### Tabsets
 
 ```{r, echo=FALSE}
 # shinyAppDir(
@@ -451,13 +454,13 @@ It's also possible to embed an entire Shiny application within an R Markdown doc
 # )
 ```
 
-### Tabs
+### Widgets
 
 ```{r, echo=FALSE}
 # shinyAppDir(
-#   system.file("examples/06_tabsets", package = "shiny"),
-#   options = list(
-#     width = "100%", height = 550
-#   )
-# )
+#    system.file("examples/07_widgets", package = "shiny"),
+#    options = list(
+#    width = "100%", height = 550
+#    )
+#  )
 ```
